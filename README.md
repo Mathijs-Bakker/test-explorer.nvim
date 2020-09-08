@@ -1,8 +1,8 @@
 # [wip] - The Dottest Chili
 
 ### Disclaimer
-These are my first baby steps in creating a NeoVim plugin with LUA.
-I am quite a n00b with LUA and lacking best practices concerning NeoVim plugins.
+These are my first baby steps in creating a NeoVim plugin with Lua.
+I am quite a n00b with Lua and lacking best practices concerning NeoVim plugins.
 So bear with me ;)
 
 ## The problem this plugin should solve
@@ -23,4 +23,16 @@ Nice to have:
 * Test sessions (running particular tests from particular files.)
 * Show active tests in gutter
 * Show failing tests in gutter
+```
+
+## Installation
+With vim-plug:
+```
+  Plug 'Mathijs-Bakker/the-dottest-chili.nvim'
+```
+
+## Run Tests
+Run test in a new window with:
+```
+  <Space>T
 ```
