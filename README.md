@@ -5,7 +5,7 @@ These are my first baby steps in creating a NeoVim plugin with Lua.
 I am quite a n00b with Lua and lacking best practices concerning NeoVim plugins.
 So bear with me ;)
 
-## The problem this plugin should solve
+## :hot_pepper: The problem this plugin should solve
 Run C# tests in your project. And receive the test results in a split.
 
 ```
@@ -25,13 +25,13 @@ Nice to have:
 * Show failing tests in gutter
 ```
 
-## Installation
+## :hot_pepper: Installation
 With vim-plug:
 ```
   Plug 'Mathijs-Bakker/the-dottest-chili.nvim'
 ```
 
-## Run Tests
+## :hot_pepper: Run Tests
 Run test in a new window with:
 ```
   <Space>T
