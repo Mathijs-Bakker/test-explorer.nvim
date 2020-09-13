@@ -10,6 +10,7 @@ local function open_test_window()
     local str = tostring(win.open()) .. tostring(cmd.test())
     api.nvim_command(str)
   end
+
 end
 
 local function run_tests()
