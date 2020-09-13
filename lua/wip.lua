@@ -9,6 +9,11 @@ local function is_cs_file(entry)
   end
 end
 
+
+local function traverse_path()
+    local root = sln.omnisharp_sln
+end
+
 local function get_cs_files_in_directory()
 
   -- TODO: Use 'dir' on windows instead of 'ls'
@@ -25,21 +30,18 @@ local function get_cs_files_in_directory()
   return csfiles
 end
 
-local function traverse_path()
-    local root = sln.omnisharp_sln
-end
-
-function get_test_files(files)
+function is_valid_testfile(file)
   local f = os.getenv("HOME") .. "/Repositories/Sonitm/Net/SocialLibrary/Tests/FriendsTests/FriendTests.cs"
 
-  local file = io.open(f, "r")
+  local file = io.open(file, "r")
   local contents = file:read("*all")
-
-  local is_valid_testfile = string.match(contents, "using NUnit.Framework;")
-
   file:close()
--- TODO: Should return valid test files
-  return "abc"
+
+  if string.match(contents, "using NUnit.Framework;") then
+    return true
+  else
+    return false
+  end
 end
 
 local cmd = "dotnet test ~/Repositories/Sonitm/Net/SocialLibrary"
