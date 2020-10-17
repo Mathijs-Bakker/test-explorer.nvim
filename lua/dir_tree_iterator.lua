@@ -9,26 +9,24 @@ local M = {}
 local vim = vim
 local version = uv.version()
 
-local path = '~/Repositories/Sonitm/Net/SocialLibrary/Tests/FriendsTests'
+local test_path = '~/Repositories/Sonitm/Net/SocialLibrary/Tests/FriendsTests'
 
-path = path:gsub("^~(/?)", uv.os_homedir().."%1")
+test_path = test_path:gsub("^~(/?)", uv.os_homedir().."%1")
 
 -- Check if is a valid dir
 -- returns is_valid
 local function is_dir(type)
 	if type == "directory" then
-		print("IsDir == true")
+		return true
 	else
-		print("IsDir == false")
+		return false
 	end	
 end
 
 local function filename_match(name, str)
 	if string.match(name, str) then
-		print("It's a " .. str .. " file")
 		return true
 	else
-		print("It's not a " .. str .. " file")
 		return false
 	end
 end
@@ -40,39 +38,44 @@ local function is_valid_file(name)
 
 	is_valid = filename_match(name, ".cs")
 
-	if vim.g.testexplorer_filename_match_test then
+	if vim.g.testexplorer_filename_match_tests then
 		is_valid = filename_match(name, "Test")
 	end
-
-	print(is_valid)
 
 	return is_valid
 end
 
 local files = {}
 
-local function get_files_in_directory()
-	-- API 1, iterate file by file.
+local function get_files_in_directory(path)
+	-- Traverse the directory
 	local h = uv.fs_scandir(path)
-	print(h)
+
 	while true do
 		local name, type = uv.fs_scandir_next(h)
-		print(name .. " " .. type)
-		is_dir(type)
-		is_valid_file(name)
+
 		if not name then
 			break
 		end
 
+		-- When type is a folder, jump into it
+		if is_dir(type) then
+			-- Fix: Path separator needs to be a backslash on Windows 
+			local temp_path = path .. "/" .. name
+			get_files_in_directory(temp_path)
+		end
+		
+		is_valid_file(name)
+
+		print(name)
 		table.insert(files, name)
-		print(table.getn(files))
 	end
 end
 
--- Func for testing the behavior in nvim
+-- Func for testing the behavior from nvim
 function M.test()
 	print("Version: " .. version)
-	get_files_in_directory()
+	get_files_in_directory(test_path)
 end
 
 return M
