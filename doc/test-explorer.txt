@@ -1,37 +1,37 @@
-*testexpl* C# testrunner for neovim
+Test Explorer C# testrunner for neovim
 
 Developed for 0.5 and not tested on 0.4.x
 
 Author: Mathijs Bakker
 
 ==============================================================================
-INTRODUCTION                                           *testexpl-introduction*
+INTRODUCTION                                         testexplorer-introduction
 
 Run tests from NeoVim
 
 ==============================================================================
-INSTALL                                                     *testexpl-install*
+INSTALL                                                   testexplorer-install
 
 For vim-plug:
 
     Plug 'Mathijs-Bakker/test-explorer.nvim'
 
 ==============================================================================
-QUICK START                                              *testexpl-quickstart*
+QUICK START                                            testexplorer-quickstart
 
 Press <Space>t to run tests
 
 ==============================================================================
-COMMANDS                                                   *testexpl-commands*
+COMMANDS                                                 testexplorer-commands
 
 |:RunTests|                                                        *:RunTests*
 
 Run unit tests in a new window.
 
 ==============================================================================
-OPTIONS				                                        *testexpl-options*
+OPTIONS				                                      testexplorer-options
 
-|show_results_leftside|                       *testexpl_show_results_leftside*
+|show_results_leftside|                     testexplorer_show_results_leftside
 
                 Opens the test window to the left. 
                 When this is not set, the default behavior opens the
@@ -39,7 +39,7 @@ OPTIONS				                                        *testexpl-options*
 
                 g:testexplorer_show_results_leftside = 1
 
-|filename_match_tests|                         *testexpl_filename_match_tests*
+|filename_match_tests|                       testexplorer_filename_match_tests
 
                 Filters only files that matches 'Test' in the filename.
                 When set to 1, only files that match 'Tests' in their name will 
