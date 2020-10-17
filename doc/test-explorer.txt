@@ -1,0 +1,57 @@
+*testexpl* C# testrunner for neovim
+
+Developed for 0.5 and not tested on 0.4.x
+
+Author: Mathijs Bakker
+
+==============================================================================
+INTRODUCTION                                           *testexpl-introduction*
+
+Run tests from NeoVim
+
+==============================================================================
+INSTALL                                                     *testexpl-install*
+
+For vim-plug:
+
+    Plug 'Mathijs-Bakker/test-explorer.nvim'
+
+==============================================================================
+QUICK START                                              *testexpl-quickstart*
+
+Press <Space>t to run tests
+
+==============================================================================
+COMMANDS                                                   *testexpl-commands*
+
+|:RunTests|                                                        *:RunTests*
+
+Run unit tests in a new window.
+
+==============================================================================
+OPTIONS				                                        *testexpl-options*
+
+|show_results_leftside|                       *testexpl_show_results_leftside*
+
+                Opens the test window to the left. 
+                When this is not set, the default behavior opens the
+                test window ro the right side.
+
+                g:testexplorer_show_results_leftside = 1
+
+|filename_match_tests|                         *testexpl_filename_match_tests*
+
+                Filters only files that matches 'Test' in the filename.
+                When set to 1, only files that match 'Tests' in their name will 
+                be included for hashing tests. Case sensitive.
+
+                Eg:
+                - MyTestClassNameTests.cs gets hashed
+                - Tests_SomeName.cs gets also hashed
+                - MyTestClassName.cs is not getting hashed
+
+                It could squeeze out some extra performance with large test 
+                suites. Or force a good habit to add 'Tests' in the filenames. 
+                
+                Default:
+                g:testexplorer_filename_match_tests = 0
