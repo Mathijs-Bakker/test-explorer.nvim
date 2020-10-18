@@ -1,5 +1,5 @@
--- Get files in a path
--- Store files in a table { path, filename )
+-- Get filepaths in a path
+-- Store filepaths in a table { path, filename )
 -- Get method names of [Tests] 
 -- Store them in a table { path, namespace, filename, method name }
 
@@ -30,7 +30,7 @@ end
 local function is_valid_file(name)
    local is_valid
 
-   file_extension = name:match("^.+(%..+)$")
+   local file_extension = name:match("^.+(%..+)$")
    is_valid = file_extension == ".cs"
 
    if vim.g.testexplorer_filename_match_tests then
@@ -40,9 +40,9 @@ local function is_valid_file(name)
    return is_valid
 end
 
-local files = {}
+local filepaths = {}
 
-local function get_files_in_directory(path)
+local function get_matching_filepaths(path)
    -- Traverse the directory
    local h = uv.fs_scandir(path)
 
@@ -55,21 +55,31 @@ local function get_files_in_directory(path)
 
       -- When type is a folder, jump into it
       if is_directory(type) and is_test_directory(name) then
-         -- Fix: Path separator needs to be a backslash on Windows 
+         -- FIX: Path separator needs to be a backslash on Windows 
          local temp_path = path .. "/" .. name
-         get_files_in_directory(temp_path)
+         get_matching_filepaths(temp_path)
       end
 
       if is_valid_file(name) then
-         print(name)
-         table.insert(files, name)
+         local filepath = path .. name 
+         table.insert(filepaths, filepath)
       end
    end
+   
+   return filepaths
+end
+
+-- TODO: traverse file paths 
+-- Check for test methods
+-- Return a table with 'file path', 'class name', 'test methods', 'namespace'
+local function discover_tests(path)
+   
 end
 
 -- Func for testing the behavior from nvim
 function M.test()
-   get_files_in_directory(test_path)
+   local fpaths = get_matching_filepaths(test_path)
+   discover_tests(fpaths)
 end
 
 return M
