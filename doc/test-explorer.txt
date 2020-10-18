@@ -1,8 +1,17 @@
-Test Explorer C# testrunner for neovim
+Test Explorer - C# testrunner for neovim                        *testexplorer*
 
 Developed for 0.5 and not tested on 0.4.x
 
 Author: Mathijs Bakker
+
+==============================================================================
+TOC
+
+INTRODUCTION                                         testexplorer-introduction
+INSTALL                                                   testexplorer-install
+QUICK START                                            testexplorer-quickstart
+COMMANDS                                                 testexplorer-commands
+OPTIONS				                                      testexplorer-options
 
 ==============================================================================
 INTRODUCTION                                         testexplorer-introduction
@@ -31,7 +40,9 @@ Run unit tests in a new window.
 ==============================================================================
 OPTIONS				                                      testexplorer-options
 
-|show_results_leftside|                     testexplorer_show_results_leftside
+Appearance:
+
+|show_results_leftside|                   *testexplorer_show_results_leftside*
 
                 Opens the test window to the left. 
                 When this is not set, the default behavior opens the
@@ -39,7 +50,9 @@ OPTIONS				                                      testexplorer-options
 
                 g:testexplorer_show_results_leftside = 1
 
-|filename_match_tests|                       testexplorer_filename_match_tests
+Filters:
+
+|filename_match_tests|                     *testexplorer_filename_match_tests*
 
                 Filters only files that matches 'Test' in the filename.
                 When set to 1, only files that match 'Tests' in their name will 
