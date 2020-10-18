@@ -15,24 +15,19 @@ test_path = test_path:gsub("^~(/?)", uv.os_homedir().."%1")
 
 -- Check if is a valid dir
 -- returns is_valid
-local function is_dir(type)
-	if type == "directory" then
-		return true
-	else
-		return false
-	end	
+local function is_directory(type)
+	return type == "directory"
+end
+
+local function is_test_directory(name)
+	name = string.lower(name)
+	return string.match(name, 'tests')
 end
 
 local function filename_match(name, str)
-	if string.match(name, str) then
-		return true
-	else
-		return false
-	end
+	return string.match(name, str)
 end
--- Check if is a valid file
--- True: has .cs extension or optional contains 'Test' in filename
--- Else return False
+
 local function is_valid_file(name)
 	local is_valid
 
@@ -59,10 +54,10 @@ local function get_files_in_directory(path)
 		end
 
 		-- When type is a folder, jump into it
-		if is_dir(type) then
-			-- Fix: Path separator needs to be a backslash on Windows 
-			local temp_path = path .. "/" .. name
-			get_files_in_directory(temp_path)
+		if is_directory(type) and is_test_directory(name) then
+				-- Fix: Path separator needs to be a backslash on Windows 
+				local temp_path = path .. "/" .. name
+				get_files_in_directory(temp_path)
 		end
 		
 		is_valid_file(name)
