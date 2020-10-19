@@ -6,7 +6,7 @@ if exists('g:testexplorer_Loaded') | finish | endif
     
     "command! RunTest lua require'testexplorer'.run_tests()
     command! RunTest lua require'wip'.runtest()
-    command! ExecuteDirTreeIterator lua require'dir_tree_iterator'.test()
+    command! ExecuteDirTreeIterator lua require'testfile_discovery'.test()
 
     let &cpo = s:save_cpo
     unlet s:save_cpo
