@@ -40,7 +40,7 @@ local function is_valid_file(name)
    return is_valid
 end
 
-local filepaths = {}
+local candidate_filepaths = {}
 
 local function get_candidate_filepaths(path)
    -- Traverse the directory
@@ -62,26 +62,30 @@ local function get_candidate_filepaths(path)
 
       if is_valid_file(name) and not is_directory(type) then
          local filepath = path .. "/" .. name 
-         table.insert(filepaths, filepath)
+         table.insert(candidate_filepaths, filepath)
       end
    end
    
-   return filepaths
+   return candidate_filepaths
 end
 
 -- TODO: traverse file paths 
 -- Check for test methods
 -- Return a table with 'file path', 'class name', 'test methods', 'namespace'
 local function discover_testfiles(t_paths)
+   local testfiles = {}
+
    for _,  path in pairs(t_paths) do
       local file = io.open(path, "r")
       local content = file:read("*all")
       file:close()
 
       if string.match(content, "using NUnit.Framework;") then
-         print(path .. " is a test file. ")
+         table.insert(testfiles, path)
       end
    end
+
+   return testfiles
 end
 
 
