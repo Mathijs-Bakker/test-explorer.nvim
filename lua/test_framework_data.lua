@@ -29,14 +29,3 @@ table.insert(testingframeworks_data, xunit)
 
 return testingframeworks_data
 
-local test_config = {}
-
-local vim = vim
-
-function test_config.test_framework()
-   
-
-end
-
-return test_config
-
