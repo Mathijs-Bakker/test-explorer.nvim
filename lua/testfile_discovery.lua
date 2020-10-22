@@ -14,7 +14,7 @@ end
 
 local function is_test_directory(name)
    name = string.lower(name)
-   return string.match(name, 'tests')
+   return string.match(name, 'tests?')
 end
 
 local function filename_match(name, str)
