@@ -5,7 +5,7 @@ Developed for 0.5 and not tested on 0.4.x
 Author: Mathijs Bakker
 
 ==============================================================================
-TOC
+CONTENTS
 
 INTRODUCTION                                         testexplorer-introduction
 INSTALL                                                   testexplorer-install
