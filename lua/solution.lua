@@ -4,21 +4,21 @@ local api = vim.api
 local M = {}
 
 local function omnisharp_sln()
-   local sln = vim.b.OmniSharp_host.sln_or_dir
-
-   if sln == nil then
-      echom("Cannot load a solution file. No omnisharp server running to provide one.")
-      echom("lua/solution.lua: Providing a .sln from Sonitm project for testing purposes...")
-      sln = '~/Repositories/Sonitm/Net/SocialLibrary/Tests/FriendsTests'
-   else
-      sln = string.match(sln, ".+/")
+   if vim.b.OmniSharp_host then
+      -- Lua throws an error on vim.b.OmniSharp_host.sln_or_dir
+      -- Did not test it when OmniSharp is loaded and server can provide host's path to .sln
+      local sln = vim.b.OmniSharp_host.sln_or_dir
+      return string.match(sln, ".+/")
    end
+
+   local sln = '~/Repositories/Sonitm/Net/SocialLibrary/SocialLibrary.sln'
+   print(sln)
 
    return sln
 end
 
-function Get()
-   omnisharp_sln()
+function M.get()
+   return omnisharp_sln()
 end
 
 return M
