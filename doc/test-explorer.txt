@@ -11,6 +11,7 @@ INTRODUCTION                                         testexplorer-introduction
 INSTALL                                                   testexplorer-install
 QUICK START                                            testexplorer-quickstart
 COMMANDS                                                 testexplorer-commands
+PLUGIN BEHAVIOR                                   testexplorer-plugin-behavior
 OPTIONS				                                      testexplorer-options
 
 ==============================================================================
@@ -36,6 +37,19 @@ COMMANDS                                                 testexplorer-commands
 |:RunTests|                                                        *:RunTests*
 
 Run unit tests in a new window.
+
+==============================================================================
+PLUGIN BEHAVIOR                                   testexplorer-plugin-behavior
+
+TestExplorer:
+- Gets the solution file (.sln) from OmniSharp.  
+- Reads the solution to get the paths to the test directories 
+  If 'test' or 'tests' (case-insensitive) is not into the directory name then
+  it will not be included for testfiles discovery
+- Discovers test file candidates and validates them
+- Gets test method from files
+
+
 
 ==============================================================================
 OPTIONS				                                      testexplorer-options
