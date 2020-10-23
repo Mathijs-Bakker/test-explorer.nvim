@@ -1,12 +1,14 @@
-local uv = require("luv")
 local M = {}
+local uv = require("luv")
+local path = require("path")
+
 local vim = vim
 
 local path_separator = package.config:sub(1, 1)
 
 local test_path = '~/Repositories/Sonitm/Net/SocialLibrary/Tests/FriendsTests'
 
-test_path = test_path:gsub("^~(/?)", uv.os_homedir().."%1")
+test_path = path.expand(test_path)
 
 local function is_directory(type)
    return type == "directory"
