@@ -1,12 +1,16 @@
-local current_test_framework = {}
+local M = {}
 
-local solution_path = require("solution").get()
+local solution = require('solution').get()
+local path = require('path')
 
-local framework_data = require("test_framework_data")
+-- local framework_data = require("test_framework_data")
 
-
-function get()
-   local f_sln = assert(io.open(solution_path, "r"))
+local function get()
+   local home = vim.fn.expand("~")
+   -- solution = solution:gsub("^" .. home, '~', 1)
+   solution = path.expand(solution)
+   print("current : " .. solution)
+   local f_sln = assert(io.open(solution, "r"))
 
    while true do
       local line = io.read("*line")
@@ -16,11 +20,15 @@ function get()
       if string.match(string.lower(line), "tests") then
          local candidate_project_path = string.match(line, '".*"')
          if string.match(candidate_project_path, '.csproj') then
-            print("Add tests directory: " ... s)
+            print("Add tests directory: " .. candidate_project_path)
          end
       end
    end 
    f_sln:close()
 end
 
-return current_test_framework
+function M.test()
+  get() 
+end
+
+return M
