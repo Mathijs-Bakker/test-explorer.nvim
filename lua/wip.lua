@@ -19,30 +19,43 @@ local t = {}
 -- print("project_name: " .. project_name)
 -- print("project_type: " .. project_type)
 
-local StripQuotes = function(str)
+local strip_quotes = function(str)
    str = str:gsub('"', '')
    return str
 end
 
-local Get_Candidate_Project_Path = function(line)
-   local dirty_project_path_candidate = string.match(line, '"%g*sproj"')
-   return StripQuotes(dirty_project_path_candidate)
+local get_candidate_project_path = function(line)
+   local quotes_dirty_project_path = string.match(line, '"%g*sproj"')
+   local path = strip_quotes(quotes_dirty_project_path)
+   return path
 end
 
-local Get_Relative_Path_To_Project_Directory = function(path)
-   local relative_path = path:match('^.-[\\/].*[\\/]')
-   return relative_path
+local remove_filename_from_path = function(path)
+   local relative_path_to_project_dir = path:match('^.-[\\/].*[\\/]')
+   return relative_path_to_project_dir
 end
 
-local Get_Filename = function(path)
-   local filename = project_path_candidate:match('[^\\/]*$')
+local get_filename_from_path = function(path)
+   local filename = path:match('[^\\/]*$')
    return filename
 end
 
-local Get_Project = function(filename)
-   local proj_name, proj_type = filename:match('^(.-)%.([^%.\\/]*)$')
-   return proj_name, proj_type
+local get_project_properties = function(filename)
+   local name, extension = filename:match('^(.-)%.([^%.\\/]*)$')
+   return name, extension
+end
+
+t.get = function(line)
+   local path = get_candidate_project_path(line)
+   local relative_path = remove_filename_from_path(path)
+
+   local filename = get_filename_from_path(path)
+   local project_name, project_type = get_project_properties(filename)
+   print("rel_path: " .. relative_path .. "\nproject_name: " .. project_name .. "\nproject_type: " .. project_type)
 end
 
 return t
+
+-- Takes a line from solution file and returns test project properties: project's absolute path, name and type (scproj/fsproj)
+
 
