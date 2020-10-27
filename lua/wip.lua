@@ -1,23 +1,8 @@
-local line = 'Project("{FAE04EC0}") = "ExampleTests", "tests\\ExampleTests\\ExampleTests.csproj", "{07FC1353}"'
-local line = 'Project("{FAE04EC0}") = "Testsproject", "tests\\foo\\bar\\anotherdir\\TestsProject\\TestsProject.fsproj", "{07FC1353}"'
+-- Takes a line from solution file and returns test project properties: project's absolute path, name and type (scproj/fsproj)
+-- 'Project("{FAE04EC0}") = "ExampleTests", "tests\\ExampleTests\\ExampleTests.csproj", "{07FC1353}"'
 
-local t = {}
-
--- local dirty_project_path_candidate = string.match(line, '"%g*sproj"')
--- print("dirty_project_path_candidate: " .. dirty_project_path_candidate)
-
--- local project_path_candidate = dirty_project_path_candidate:gsub('"', '')
--- print("project_path_candidate: " .. project_path_candidate)
-
--- local path = project_path_candidate:match('^.-[\\/].*[\\/]')
--- print("path: " .. path)
-
--- local filename = project_path_candidate:match('[^\\/]*$')
--- print("filename: " .. filename)
-
--- local project_name, project_type = filename:match('^(.-)%.([^%.\\/]*)$')
--- print("project_name: " .. project_name)
--- print("project_type: " .. project_type)
+-- TODO: Returned path needs to be absolute and platform-dependent 
+local sln_project_block_converter = {}
 
 local strip_quotes = function(str)
    str = str:gsub('"', '')
@@ -45,7 +30,7 @@ local get_project_properties = function(filename)
    return name, extension
 end
 
-t.get = function(line)
+sln_project_block_converter.get = function(line)
    local path = get_candidate_project_path(line)
    local relative_path = remove_filename_from_path(path)
 
@@ -54,8 +39,4 @@ t.get = function(line)
    print("rel_path: " .. relative_path .. "\nproject_name: " .. project_name .. "\nproject_type: " .. project_type)
 end
 
-return t
-
--- Takes a line from solution file and returns test project properties: project's absolute path, name and type (scproj/fsproj)
-
-
+return sln_project_block_converter
