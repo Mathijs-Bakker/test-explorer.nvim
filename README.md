@@ -3,7 +3,7 @@
 This repo is soo WiP... it's not even worth to take a serious look at it.
 Or whatever look at all.
 
-'Master' branch is considered 'Development' branch...
+'master' branch is considered to be the 'development' branch...
 till further notice.
 
 ## :compass: Installation
