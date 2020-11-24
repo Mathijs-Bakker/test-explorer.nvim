@@ -1,7 +1,7 @@
-local path = require("path")
+local pathlib = require("path")
 local solution = require("solution")
 
-local sln_project_block_converter = {}
+local extract_project = {}
 
 local strip_quotes = function(str)
    str = str:gsub('"', '')
@@ -40,14 +40,14 @@ local create_absolute_path = function(project_rel_from_sln_path)
       project_rel_from_sln_path = project_rel_from_sln_path:gsub("\\", "/")
    end
 
-   return sln_path .. project_rel_from_sln_path 
+   return sln_path .. project_rel_from_sln_path
 end
 
-sln_project_block_converter.get = function(line)
-   local project_block_path = get_path_from_project_block(line)
-   project_path = remove_filename_from_path(project_block_path)
+extract_project.from = function(project_block)
+   local project_block_path = get_path_from_project_block(project_block)
+   local project_path = remove_filename_from_path(project_block_path)
    project_path = create_absolute_path(project_path)
-   project_path = path.make_absolute(project_path)
+   project_path = pathlib.make_absolute(project_path)
 
    local filename = get_filename_from_path(project_block_path)
    local project_name, project_type = get_project_properties(filename)
@@ -55,4 +55,4 @@ sln_project_block_converter.get = function(line)
    return project_name, project_type, project_path
 end
 
-return sln_project_block_converter
+return extract_project
