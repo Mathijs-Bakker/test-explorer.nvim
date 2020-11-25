@@ -20,4 +20,18 @@ M.get_project_properties = function(filename)
    return name, extension
 end
 
+M.create_absolute_path = function(project_rel_from_sln_path)
+
+   local sln = solution:get()
+   local sln_path = remove_filename_from_path(sln)
+
+   local os = package.config:sub(1, 1) == '\\' and 'win' or 'unix'
+
+   if os =='unix' then
+      project_rel_from_sln_path = project_rel_from_sln_path:gsub("\\", "/")
+   end
+
+   return sln_path .. project_rel_from_sln_path
+end
+
 return M

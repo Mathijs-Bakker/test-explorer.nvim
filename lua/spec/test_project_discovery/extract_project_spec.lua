@@ -2,7 +2,7 @@
 
 require 'busted.runner'()
 
-local sut = require 'namespace.test_project_reader'
+local sut = require 'test_project_discovery.test_project_reader'
 
 describe("get_project_path(project_block):", function()
    it("should return the c# project path", function()
@@ -67,3 +67,10 @@ describe("get_project_properties(filename):", function()
    end)
 end)
 
+local solution = require 'test_project_discovery.solution'
+
+describe("create_absolute_path(relative_path)", function()
+   it("should return an absolute path", function()
+      local sln_mock = mock(solution)
+   end)
+end)
