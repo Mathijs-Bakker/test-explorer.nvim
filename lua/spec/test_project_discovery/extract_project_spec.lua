@@ -68,6 +68,7 @@ describe("get_project_properties(filename):", function()
 end)
 
 local solution = require 'test_project_discovery.solution'
+-- local solution = require '~/Repositories/test-explorer.nvim/lua/test_project_discovery/solution'
 
 describe("create_absolute_path(relative_path)", function()
    it("should return an absolute path", function()
