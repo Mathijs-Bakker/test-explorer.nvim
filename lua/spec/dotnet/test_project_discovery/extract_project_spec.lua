@@ -1,8 +1,8 @@
 require 'busted.runner'()
 
-local sut = require 'test_project_discovery.test_project_reader'
+local sut = require 'dotnet/test_project_discovery/test_project_properties_extractor'
 
-describe("Fetch the properties of a test project from a 'project block' (as found in a .NET solution file):\n", function()
+describe("Extract and return the properties of a test project from a 'project block' (as found in a .NET solution file):\n", function()
    describe("get_project_path() :", function()
       it("Should return the path of a Csharp project", function()
 
@@ -63,8 +63,7 @@ describe("Fetch the properties of a test project from a 'project block' (as foun
    end)
 
 
-   local solution = require 'test_project_discovery.solution'
-   -- local solution = require '~/Repositories/test-explorer.nvim/lua/test_project_discovery/solution'
+   local solution = require 'dotnet/test_project_discovery/solution'
 
    describe("create_absolute_path(relative_path)", function()
       it("should return an absolute path", function()
